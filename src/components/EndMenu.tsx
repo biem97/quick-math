@@ -1,6 +1,6 @@
 import { ActionIcon, Group, Paper, Text } from "@mantine/core";
 import { TiRefresh } from "react-icons/ti";
-import { useStore } from "../store";
+import { useStore } from "../core/store";
 
 interface GameEndMenuProps {}
 

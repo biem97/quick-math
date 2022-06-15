@@ -1,4 +1,5 @@
 import create from "zustand";
+import QuickMath from "./store";
 
 // utils
 import { generateEquation, generateRandomNumber } from "./game";

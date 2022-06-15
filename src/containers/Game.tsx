@@ -8,7 +8,7 @@ import Equation from "../components/Equation";
 import Score from "../components/Score";
 
 // Store
-import { useStore } from "../store";
+import { useStore } from "../core/store";
 
 interface GameProps {}
 

@@ -1,5 +1,5 @@
 import { Text } from "@mantine/core";
-import { useStore } from "../store";
+import { useStore } from "../core/store";
 
 interface GameEquationProps {}
 

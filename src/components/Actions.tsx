@@ -2,7 +2,7 @@ import { ActionIcon } from "@mantine/core";
 import { TiTick, TiTimes } from "react-icons/ti";
 
 // Store
-import { useStore } from "../store";
+import { useStore } from "../core/store";
 
 interface GameActionsProps {}
 

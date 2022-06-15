@@ -1,7 +1,7 @@
 import { Text } from "@mantine/core";
 
 // Store
-import { useStore } from "../store";
+import { useStore } from "../core/store";
 
 interface ScoreProps {}
 
