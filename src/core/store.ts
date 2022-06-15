@@ -1,76 +1,60 @@
 import create from "zustand";
-import QuickMath from "./store";
 
 // utils
-import { generateEquation, generateRandomNumber } from "./game";
+import { generateEquation, initializeGame } from "./game";
 
-interface GameState {
-  score: number;
-  gameStatus: "READY" | "PLAYING" | "END";
-  firstValue: number;
-  secondValue: number;
-  sum: number;
+// types
+import { GameState } from "./types";
+
+interface GameActions {
   yes: () => void;
   no: () => void;
   reset: () => void;
 }
 
-export const useStore = create<GameState>((set) => ({
-  score: 0,
-  gameStatus: "READY",
-  firstValue: generateRandomNumber(),
-  secondValue: generateRandomNumber(),
-  sum: 9,
-  yes: () =>
-    set(({ score, firstValue, secondValue, sum }) => {
-      const previousGame = {
-        firstValue,
-        secondValue,
-        sum,
-      };
+interface GameStore extends GameState {
+  actions: GameActions;
+}
 
-      const nextGame = generateEquation(previousGame);
+export const useStore = create<GameStore>((set) => {
+  const initialGameValue = initializeGame();
 
-      if (firstValue + secondValue === sum) {
-        return {
-          score: score + 1,
-          ...nextGame,
-        };
-      }
+  return {
+    ...initialGameValue,
+    actions: {
+      yes: () =>
+        set((state) => {
+          const { firstValue, secondValue, sum, score } = state;
 
-      return {
-        gameStatus: "END",
-      };
-    }),
-  no: () =>
-    set(({ score, firstValue, secondValue, sum }) => {
-      const previousGame = {
-        firstValue,
-        secondValue,
-        sum,
-      };
+          if (firstValue + secondValue === sum) {
+            const nextGame = generateEquation(state);
+            return {
+              score: score + 1,
+              ...nextGame,
+            };
+          }
 
-      const nextGame = generateEquation(previousGame);
+          return {
+            gameStatus: "END",
+          };
+        }),
+      no: () =>
+        set((state) => {
+          const { score, firstValue, secondValue, sum } = state;
 
-      if (firstValue + secondValue !== sum) {
-        return {
-          score: score + 1,
-          ...nextGame,
-        };
-      }
+          if (firstValue + secondValue !== sum) {
+            const nextGame = generateEquation(state);
+            return {
+              score: score + 1,
+              ...nextGame,
+            };
+          }
 
-      return {
-        gameStatus: "END",
-      };
-    }),
-  reset: () =>
-    set(() => {
-      const nextGame = generateEquation();
-
-      return {
-        score: 0,
-        gameStatus: "READY",
-        ...nextGame,
-      };
-    }),
-}));
+          return {
+            gameStatus: "END",
+          };
+        }),
+      reset: () => set(() => initializeGame()),
+    },
+  };
+});

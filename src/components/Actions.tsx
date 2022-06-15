@@ -8,7 +8,7 @@ interface GameActionsProps {}
 
 const GameActions = ({}: GameActionsProps) => {
   const { yes, no, gameStatus } = useStore(
-    ({ yes, no, gameStatus, reset }) => ({
+    ({ gameStatus, actions: { yes, no, reset } }) => ({
       yes,
       no,
       reset,

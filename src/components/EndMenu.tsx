@@ -5,7 +5,10 @@ import { useStore } from "../core/store";
 interface GameEndMenuProps {}
 
 const GameEndMenu = ({}: GameEndMenuProps) => {
-  const { score, reset } = useStore(({ score, reset }) => ({ score, reset }));
+  const { score, reset } = useStore(({ score, actions: { reset } }) => ({
+    score,
+    reset,
+  }));
   return (
     <Group
       direction="column"
