@@ -1,14 +1,19 @@
 import { ActionIcon, Group, Paper, Text } from "@mantine/core";
+import { useHotkeys } from "@mantine/hooks";
 import { TiRefresh } from "react-icons/ti";
-import { useStore } from "../core/store";
+import { useGameStore } from "../core/store";
 
-interface GameEndMenuProps {}
-
-const GameEndMenu = ({}: GameEndMenuProps) => {
-  const { score, reset } = useStore(({ score, actions: { reset } }) => ({
+const GameEndMenu = () => {
+  const { score, reset } = useGameStore(({ score, actions: { reset } }) => ({
     score,
     reset,
   }));
+
+  useHotkeys([
+    ["Enter", reset],
+    ["Space", reset],
+  ]);
+
   return (
     <Group
       direction="column"

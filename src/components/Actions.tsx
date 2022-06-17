@@ -1,21 +1,27 @@
 import { ActionIcon } from "@mantine/core";
+import { useHotkeys } from "@mantine/hooks";
 import { TiTick, TiTimes } from "react-icons/ti";
 
 // Store
-import { useStore } from "../core/store";
+import { useGameStore } from "../core/store";
 
-interface GameActionsProps {}
-
-const GameActions = ({}: GameActionsProps) => {
-  const { yes, no, gameStatus } = useStore(
-    ({ gameStatus, actions: { yes, no, reset } }) => ({
+const GameActions = () => {
+  const { yes, no, gameStatus, end } = useGameStore(
+    ({ gameStatus, actions: { yes, no, reset, end } }) => ({
       yes,
       no,
       reset,
       gameStatus,
+      end,
     })
   );
   const isEnd = gameStatus === "END";
+
+  useHotkeys([
+    ["ArrowLeft", yes],
+    ["ArrowRight", no],
+    ["Escape", () => end],
+  ]);
 
   return (
     <>

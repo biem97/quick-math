@@ -1,12 +1,10 @@
 import { Text } from "@mantine/core";
 
 // Store
-import { useStore } from "../core/store";
+import { useGameStore } from "../core/store";
 
-interface ScoreProps {}
-
-const Score = ({}: ScoreProps) => {
-  const { score } = useStore(({ score }) => ({ score }));
+const Score = () => {
+  const { score } = useGameStore(({ score }) => ({ score }));
 
   return (
     <Text

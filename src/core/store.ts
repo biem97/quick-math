@@ -1,7 +1,7 @@
 import create from "zustand";
 
 // utils
-import { generateEquation, initializeGame } from "./game";
+import { generateNextGame, initializeGame } from "./game";
 
 // types
 import { GameState } from "./types";
@@ -10,13 +10,14 @@ interface GameActions {
   yes: () => void;
   no: () => void;
   reset: () => void;
+  end: () => void;
 }
 
 interface GameStore extends GameState {
   actions: GameActions;
 }
 
-export const useStore = create<GameStore>((set) => {
+export const useGameStore = create<GameStore>((set) => {
   const initialGameValue = initializeGame();
 
   return {
@@ -24,14 +25,10 @@ export const useStore = create<GameStore>((set) => {
     actions: {
       yes: () =>
         set((state) => {
-          const { firstValue, secondValue, sum, score } = state;
-
+          const { firstValue, secondValue, sum } = state;
           if (firstValue + secondValue === sum) {
-            const nextGame = generateEquation(state);
-            return {
-              score: score + 1,
-              ...nextGame,
-            };
+            const nextGame = generateNextGame(state);
+            return nextGame;
           }
 
           return {
@@ -40,14 +37,11 @@ export const useStore = create<GameStore>((set) => {
         }),
       no: () =>
         set((state) => {
-          const { score, firstValue, secondValue, sum } = state;
+          const { firstValue, secondValue, sum } = state;
 
           if (firstValue + secondValue !== sum) {
-            const nextGame = generateEquation(state);
-            return {
-              score: score + 1,
-              ...nextGame,
-            };
+            const nextGame = generateNextGame(state);
+            return nextGame;
           }
 
           return {
@@ -55,6 +49,10 @@ export const useStore = create<GameStore>((set) => {
           };
         }),
       reset: () => set(() => initializeGame()),
+      end: () =>
+        set(() => ({
+          gameStatus: "END",
+        })),
     },
   };
 });

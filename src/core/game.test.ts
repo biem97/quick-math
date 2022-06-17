@@ -1,5 +1,12 @@
 import { describe, it, expect } from "vitest";
-import { MAX_VALUE, MIN_VALUE, generateRandomBoolean } from "./game";
+import {
+  MAX_VALUE,
+  MIN_VALUE,
+  TIMEOUT_DURATION,
+  RANDOM_BOOLEAN_ODD,
+  initializeGame,
+  generateNextGame,
+} from "./game";
 
 describe("MAX_VALUE", () => {
   it("exists", () => {
@@ -21,4 +28,57 @@ describe("MIN_VALUE", () => {
   });
 });
 
-describe("generateRandomBoolean", () => {});
+describe("TIMEOUT_DURATION", () => {
+  it("exists", () => {
+    expect(TIMEOUT_DURATION).toBeDefined();
+  });
+
+  it("has correct values", () => {
+    expect(TIMEOUT_DURATION).toBe(1500);
+  });
+});
+
+describe("RANDOM_BOOLEAN_ODD", () => {
+  it("exists", () => {
+    expect(RANDOM_BOOLEAN_ODD).toBeDefined();
+  });
+
+  it("has correct values", () => {
+    expect(RANDOM_BOOLEAN_ODD).toBe(0.5);
+  });
+});
+
+describe("initializeGame", () => {
+  it("exists", () => {
+    expect(initializeGame).toBeDefined();
+  });
+
+  it("generates correct game state", () => {
+    const game = initializeGame();
+
+    expect(game.firstValue).toBeTypeOf("number");
+    expect(game.secondValue).toBeTypeOf("number");
+    expect(game.sum).toBeTypeOf("number");
+    expect(game.score).toEqual(0);
+    expect(game.timeoutDuration).toEqual(TIMEOUT_DURATION);
+    expect(game.gameStatus).toBe("READY");
+  });
+});
+
+describe("generateNextGame", () => {
+  it("exists", () => {
+    expect(generateNextGame).toBeDefined();
+  });
+
+  it("has correct values", () => {
+    const game = initializeGame();
+    const nextGame = generateNextGame(game);
+
+    expect(nextGame.firstValue).toBeTypeOf("number");
+    expect(nextGame.secondValue).toBeTypeOf("number");
+    expect(nextGame.sum).toBeTypeOf("number");
+    expect(nextGame.score).toEqual(1);
+    expect(nextGame.timeoutDuration).toEqual(TIMEOUT_DURATION);
+    expect(nextGame.gameStatus).toBe("PLAYING");
+  });
+});

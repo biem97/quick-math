@@ -1,10 +1,10 @@
 import { Text } from "@mantine/core";
-import { useStore } from "../core/store";
+import { useGameStore } from "../core/store";
 
 interface GameEquationProps {}
 
 const GameEquation = ({}: GameEquationProps) => {
-  const [firstValue, secondValue, sum] = useStore(
+  const [firstValue, secondValue, sum] = useGameStore(
     ({ firstValue, secondValue, sum }) => [firstValue, secondValue, sum]
   );
 

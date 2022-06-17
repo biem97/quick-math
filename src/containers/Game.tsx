@@ -6,20 +6,23 @@ import Actions from "../components/Actions";
 import EndMenu from "../components/EndMenu";
 import Equation from "../components/Equation";
 import Score from "../components/Score";
+import Timer from "../components/Timer";
 
 // Store
-import { useStore } from "../core/store";
+import { useGameStore } from "../core/store";
 
 interface GameProps {}
 
 const Game = ({}: GameProps) => {
-  const { gameStatus } = useStore(({ gameStatus }) => ({
+  const { gameStatus } = useGameStore(({ gameStatus }) => ({
     gameStatus,
   }));
   const isEnd = gameStatus === "END";
+  const isPlaying = gameStatus === "PLAYING";
 
   return (
     <>
+      {isPlaying && <Timer />}
       <Group position="right">
         <Score />
       </Group>
@@ -27,7 +30,6 @@ const Game = ({}: GameProps) => {
       <Center
         style={{
           flexGrow: 1,
-          // flexBasis: "384px",
         }}
       >
         <Equation />
