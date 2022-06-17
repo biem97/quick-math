@@ -61,7 +61,7 @@ describe("initializeGame", () => {
     expect(game.sum).toBeTypeOf("number");
     expect(game.score).toEqual(0);
     expect(game.timeoutDuration).toEqual(TIMEOUT_DURATION);
-    expect(game.gameStatus).toBe("READYY");
+    expect(game.gameStatus).toBe("READY");
   });
 });
 
