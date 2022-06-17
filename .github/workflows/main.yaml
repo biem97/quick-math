@@ -8,12 +8,11 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest # Specify OS system
 
     strategy:
       matrix:
-        node-version: [10.x, 12.x, 14.x, 15.x] # Specify OS system
-
+        node-version: [16.x] # Specify Node Version
     steps:
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
