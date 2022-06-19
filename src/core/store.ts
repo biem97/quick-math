@@ -9,17 +9,23 @@ import { GameState } from "./types";
 // Media
 import soundPlayer from "./soundPlayer";
 
+// Scores Board
+import scoresBoard from "./scoresBoard";
+
 interface GameActions {
   yes: () => void;
   no: () => void;
-  reset: () => void;
+  play: () => void;
   end: () => void;
   home: () => void;
+  seeScoreBoard: () => void;
   toggleSound: () => void;
 }
 
 interface GameStore extends GameState {
   isSoundOn: boolean;
+  scoresBoard: number[];
+  bestScore: number;
   actions: GameActions;
 }
 
@@ -27,13 +33,10 @@ export const useGameStore = create<GameStore>((set) => {
   const initialGameValue = initializeGame();
 
   return {
-    firstValue: 0,
-    secondValue: 0,
-    score: 0,
-    sum: 0,
-    timeoutDuration: 0,
-    gameStatus: "NOT_READY",
+    ...initialGameValue,
     isSoundOn: true,
+    bestScore: scoresBoard.bestScore,
+    scoresBoard: scoresBoard.scoresBoard,
     actions: {
       yes: () =>
         set((state) => {
@@ -46,8 +49,10 @@ export const useGameStore = create<GameStore>((set) => {
 
           // End game
           state.isSoundOn && soundPlayer.playWrongAnswerSound();
+          scoresBoard.updateScoresBoard(state.score);
           return {
             gameStatus: "END",
+            bestScore: scoresBoard.bestScore,
           };
         }),
       no: () =>
@@ -62,23 +67,33 @@ export const useGameStore = create<GameStore>((set) => {
 
           // End game
           state.isSoundOn && soundPlayer.playWrongAnswerSound();
+          scoresBoard.updateScoresBoard(state.score);
           return {
             gameStatus: "END",
+            bestScore: scoresBoard.bestScore,
           };
         }),
-      reset: () => set(() => initializeGame()),
       end: () =>
         set((state) => {
           // End game
           state.isSoundOn && soundPlayer.playWrongAnswerSound();
+          scoresBoard.updateScoresBoard(state.score);
           return {
             gameStatus: "END",
+            bestScore: scoresBoard.bestScore,
           };
         }),
+      play: () => set(() => initializeGame("READY")),
       home: () =>
         set(() => {
           return {
-            gameStatus: "NOT_READY",
+            gameStatus: "HOME",
+          };
+        }),
+      seeScoreBoard: () =>
+        set(() => {
+          return {
+            gameStatus: "SCORES_BOARD",
           };
         }),
       toggleSound: () =>

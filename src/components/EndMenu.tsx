@@ -1,21 +1,22 @@
-import { ActionIcon, Group, Paper, Text } from "@mantine/core";
+import { ActionIcon, Box, Group, Paper, Text, Tooltip } from "@mantine/core";
 import { useHotkeys } from "@mantine/hooks";
 import { useGameStore } from "../core/store";
-import { TiRefresh, TiHome } from "react-icons/ti";
+import { TiMediaPlay, TiHome } from "react-icons/ti";
 import { MdLeaderboard } from "react-icons/md";
 
 const GameEndMenu = () => {
-  const { score, reset, home } = useGameStore(
-    ({ score, actions: { reset, home } }) => ({
+  const { score, bestScore, play, home } = useGameStore(
+    ({ score, bestScore, actions: { play, home } }) => ({
       score,
-      reset,
+      play,
       home,
+      bestScore,
     })
   );
 
   useHotkeys([
-    ["Enter", reset],
-    ["Space", reset],
+    ["Enter", play],
+    ["Space", play],
   ]);
 
   return (
@@ -36,61 +37,133 @@ const GameEndMenu = () => {
           backgroundColor: sx.colors.gray[4],
         })}
         radius="lg"
+        py="xl"
         withBorder
       >
-        <Text
-          component="div"
-          align="center"
-          size="xl"
-          weight={700}
-          sx={(theme) => ({
-            fontSize: "2.5rem",
-            fontFamily: "Greycliff CF, sans-serif",
-            color: theme.colors.blue[5],
-          })}
-        >
-          Current
-        </Text>
-        <Text
-          component="div"
-          align="center"
-          color="white"
-          weight={900}
-          style={{ fontSize: "2rem", fontFamily: "Greycliff CF, sans-serif" }}
-        >
-          {score}
-        </Text>
+        <Box>
+          <Text
+            component="div"
+            align="center"
+            size="xl"
+            weight={700}
+            sx={(theme) => ({
+              fontSize: "2.5rem",
+              "@media (max-width: 755px)": {
+                fontSize: theme.fontSizes.lg,
+              },
+              fontFamily: "Greycliff CF, sans-serif",
+              color: theme.colors.blue[5],
+            })}
+          >
+            Current
+          </Text>
+          <Text
+            component="div"
+            align="center"
+            color="white"
+            weight={900}
+            sx={(theme) => ({
+              fontSize: "2rem",
+              "@media (max-width: 755px)": {
+                fontSize: theme.fontSizes.md,
+              },
+              fontFamily: "Greycliff CF, sans-serif",
+            })}
+          >
+            {score}
+          </Text>
+        </Box>
+        <Box>
+          <Text
+            component="div"
+            align="center"
+            size="xl"
+            weight={700}
+            color="skyblue"
+            sx={(theme) => ({
+              fontSize: "2.5rem",
+              "@media (max-width: 755px)": {
+                fontSize: theme.fontSizes.lg,
+              },
+              fontFamily: "Greycliff CF, sans-serif",
+              color: theme.colors.blue[5],
+            })}
+          >
+            Best Score
+          </Text>
+          <Text
+            component="div"
+            align="center"
+            color="white"
+            weight={900}
+            sx={(theme) => ({
+              fontSize: "2rem",
+              "@media (max-width: 755px)": {
+                fontSize: theme.fontSizes.md,
+              },
+              fontFamily: "Greycliff CF, sans-serif",
+            })}
+          >
+            {bestScore}
+          </Text>
+        </Box>
       </Paper>
+
       <Group position="apart">
-        <ActionIcon
+        <Tooltip
           style={{
             flexGrow: 1,
           }}
-          size="xl"
-          variant="default"
-          onClick={reset}
+          label="Play"
+          withArrow
         >
-          <TiRefresh color="skyblue" size="48" />
-        </ActionIcon>
-        <ActionIcon
+          <ActionIcon
+            style={{
+              width: "100%",
+            }}
+            size="xl"
+            variant="default"
+            onClick={play}
+          >
+            <TiMediaPlay color="skyblue" size="48" />
+          </ActionIcon>
+        </Tooltip>
+        <Tooltip
           style={{
             flexGrow: 1,
           }}
-          size="xl"
-          variant="default"
-          onClick={home}
+          label="Home"
+          withArrow
         >
-          <TiHome color="skyblue" size="32" />
-        </ActionIcon>
-        <ActionIcon
+          <ActionIcon
+            style={{
+              width: "100%",
+            }}
+            size="xl"
+            variant="default"
+            onClick={home}
+          >
+            <TiHome color="skyblue" size="32" />
+          </ActionIcon>
+        </Tooltip>
+
+        <Tooltip
           style={{
             flexGrow: 1,
           }}
-          size="xl"
-          variant="default"
+          label="Scores Board"
+          withArrow
         >
-          <MdLeaderboard color="skyblue" size="32" />
-        </ActionIcon>
+          <ActionIcon
+            style={{
+              width: "100%",
+            }}
+            size="xl"
+            variant="default"
+          >
+            <MdLeaderboard color="skyblue" size="32" />
+          </ActionIcon>
+        </Tooltip>
       </Group>
     </Group>
   );

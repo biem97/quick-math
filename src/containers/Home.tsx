@@ -1,10 +1,10 @@
 // Mantine UI
-import { Box, ActionIcon, Group, Anchor } from "@mantine/core";
+import { ActionIcon, Group, Anchor, Tooltip } from "@mantine/core";
 import { MdLeaderboard } from "react-icons/md";
 import { TiMediaPlay, TiSocialGithub } from "react-icons/ti";
 
 // Images
-import GameLogo from "../assets/image/game_logo2.svg";
+import GameLogo from "../assets/image/game_logo.svg";
 
 // Store
 import { useGameStore } from "../core/store";
@@ -12,63 +12,88 @@ import { useGameStore } from "../core/store";
 interface GameProps {}
 
 const Home = ({}: GameProps) => {
-  const { reset } = useGameStore(({ gameStatus, actions: { reset } }) => ({
-    gameStatus,
-    reset,
-  }));
+  const { play, seeScoreBoard } = useGameStore(
+    ({ gameStatus, actions: { play, seeScoreBoard } }) => ({
+      gameStatus,
+      play,
+      seeScoreBoard,
+    })
+  );
 
   return (
-    <Box
+    <Group
+      direction="column"
+      align="center"
       style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "flex-end",
-        padding: "30px",
+        justifyContent: "center",
+        height: "100%",
       }}
+      px="md"
     >
-      <Box>
-        <img
-          src={GameLogo}
+      <img src={GameLogo} />
+      <Group
+        mt="xl"
+        style={{
+          width: "80%",
+        }}
+      >
+        <Tooltip
           style={{
-            marginTop: "20vh",
-            flexBasis: "160px",
+            flexGrow: 1,
           }}
-        />
-      </Box>
-      <Group mt="xl">
-        <ActionIcon
-          style={{
-            width: "120px",
-          }}
-          size="xl"
-          variant="default"
-          onClick={reset}
+          label="Play"
+          withArrow
         >
-          <TiMediaPlay color="skyblue" size="32" />
-        </ActionIcon>
-        <ActionIcon
-          style={{
-            width: "120px",
-          }}
-          size="xl"
-          variant="default"
-        >
-          <MdLeaderboard color="skyblue" size="32" />
-        </ActionIcon>
-        <Anchor href="https://github.com/biem97/quick-math" target="_blank">
           <ActionIcon
             style={{
-              width: "120px",
+              width: "100%",
             }}
             size="xl"
             variant="default"
+            onClick={play}
           >
-            <TiSocialGithub color="skyblue" size="46" />
+            <TiMediaPlay color="skyblue" size="32" />
           </ActionIcon>
-        </Anchor>
+        </Tooltip>
+        <Tooltip
+          style={{
+            flexGrow: 1,
+          }}
+          label="Scores Board"
+          withArrow
+        >
+          <ActionIcon
+            style={{
+              width: "100%",
+            }}
+            size="xl"
+            variant="default"
+            onClick={seeScoreBoard}
+          >
+            <MdLeaderboard color="skyblue" size="32" />
+          </ActionIcon>
+        </Tooltip>
+        <Tooltip
+          style={{
+            flexGrow: 1,
+          }}
+          label="GitHub Source Code"
+          withArrow
+        >
+          <Anchor href="https://github.com/biem97/quick-math" target="_blank">
+            <ActionIcon
+              style={{
+                width: "100%",
+              }}
+              size="xl"
+              variant="default"
+            >
+              <TiSocialGithub color="skyblue" size="46" />
+            </ActionIcon>
+          </Anchor>
+        </Tooltip>
       </Group>
-    </Box>
+    </Group>
   );
 };
 
