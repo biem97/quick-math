@@ -5,7 +5,7 @@ import { HiVolumeOff, HiVolumeUp } from "react-icons/hi";
 // Store
 import { useGameStore } from "../core/store";
 import { useHotkeys } from "@mantine/hooks";
-import ThemeToggle from "./ThemeToggle";
+import ThemeToggle from "./Buttons/ThemeToggle";
 
 const Helpers = () => {
   const { isSoundOn, toggleSound } = useGameStore(

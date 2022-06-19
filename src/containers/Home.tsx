@@ -1,25 +1,17 @@
 // Mantine UI
-import { ActionIcon, Group, Anchor, Tooltip } from "@mantine/core";
-import { MdLeaderboard } from "react-icons/md";
-import { TiMediaPlay, TiSocialGithub } from "react-icons/ti";
+import { Group } from "@mantine/core";
 
 // Images
 import GameLogo from "../assets/image/game_logo.svg";
-
-// Store
-import { useGameStore } from "../core/store";
+import {
+  GitHubAnchor,
+  PlayButton,
+  ScoresBoardButton,
+} from "../components/Buttons";
 
 interface GameProps {}
 
 const Home = ({}: GameProps) => {
-  const { play, seeScoreBoard } = useGameStore(
-    ({ gameStatus, actions: { play, seeScoreBoard } }) => ({
-      gameStatus,
-      play,
-      seeScoreBoard,
-    })
-  );
-
   return (
     <Group
       direction="column"
@@ -37,61 +29,9 @@ const Home = ({}: GameProps) => {
           width: "80%",
         }}
       >
-        <Tooltip
-          style={{
-            flexGrow: 1,
-          }}
-          label="Play"
-          withArrow
-        >
-          <ActionIcon
-            style={{
-              width: "100%",
-            }}
-            size="xl"
-            variant="default"
-            onClick={play}
-          >
-            <TiMediaPlay color="skyblue" size="32" />
-          </ActionIcon>
-        </Tooltip>
-        <Tooltip
-          style={{
-            flexGrow: 1,
-          }}
-          label="Scores Board"
-          withArrow
-        >
-          <ActionIcon
-            style={{
-              width: "100%",
-            }}
-            size="xl"
-            variant="default"
-            onClick={seeScoreBoard}
-          >
-            <MdLeaderboard color="skyblue" size="32" />
-          </ActionIcon>
-        </Tooltip>
-        <Tooltip
-          style={{
-            flexGrow: 1,
-          }}
-          label="GitHub Source Code"
-          withArrow
-        >
-          <Anchor href="https://github.com/biem97/quick-math" target="_blank">
-            <ActionIcon
-              style={{
-                width: "100%",
-              }}
-              size="xl"
-              variant="default"
-            >
-              <TiSocialGithub color="skyblue" size="46" />
-            </ActionIcon>
-          </Anchor>
-        </Tooltip>
+        <PlayButton />
+        <ScoresBoardButton />
+        <GitHubAnchor />
       </Group>
     </Group>
   );

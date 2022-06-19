@@ -1,23 +1,12 @@
-import { ActionIcon, Box, Group, Paper, Text, Tooltip } from "@mantine/core";
-import { useHotkeys } from "@mantine/hooks";
+import { Box, Group, Paper, Text } from "@mantine/core";
+import { PlayButton, HomeButton, ScoresBoardButton } from "./Buttons";
 import { useGameStore } from "../core/store";
-import { TiMediaPlay, TiHome } from "react-icons/ti";
-import { MdLeaderboard } from "react-icons/md";
 
 const GameEndMenu = () => {
-  const { score, bestScore, play, home } = useGameStore(
-    ({ score, bestScore, actions: { play, home } }) => ({
-      score,
-      play,
-      home,
-      bestScore,
-    })
-  );
-
-  useHotkeys([
-    ["Enter", play],
-    ["Space", play],
-  ]);
+  const { score, bestScore } = useGameStore(({ score, bestScore }) => ({
+    score,
+    bestScore,
+  }));
 
   return (
     <Group
@@ -110,60 +99,9 @@ const GameEndMenu = () => {
       </Paper>
 
       <Group position="apart">
-        <Tooltip
-          style={{
-            flexGrow: 1,
-          }}
-          label="Play"
-          withArrow
-        >
-          <ActionIcon
-            style={{
-              width: "100%",
-            }}
-            size="xl"
-            variant="default"
-            onClick={play}
-          >
-            <TiMediaPlay color="skyblue" size="48" />
-          </ActionIcon>
-        </Tooltip>
-        <Tooltip
-          style={{
-            flexGrow: 1,
-          }}
-          label="Home"
-          withArrow
-        >
-          <ActionIcon
-            style={{
-              width: "100%",
-            }}
-            size="xl"
-            variant="default"
-            onClick={home}
-          >
-            <TiHome color="skyblue" size="32" />
-          </ActionIcon>
-        </Tooltip>
-
-        <Tooltip
-          style={{
-            flexGrow: 1,
-          }}
-          label="Scores Board"
-          withArrow
-        >
-          <ActionIcon
-            style={{
-              width: "100%",
-            }}
-            size="xl"
-            variant="default"
-          >
-            <MdLeaderboard color="skyblue" size="32" />
-          </ActionIcon>
-        </Tooltip>
+        <PlayButton />
+        <HomeButton />
+        <ScoresBoardButton />
       </Group>
     </Group>
   );

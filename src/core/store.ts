@@ -18,7 +18,7 @@ interface GameActions {
   play: () => void;
   end: () => void;
   home: () => void;
-  seeScoreBoard: () => void;
+  seeScoresBoard: () => void;
   toggleSound: () => void;
 }
 
@@ -53,6 +53,7 @@ export const useGameStore = create<GameStore>((set) => {
           return {
             gameStatus: "END",
             bestScore: scoresBoard.bestScore,
+            scoresBoard: scoresBoard.scoresBoard,
           };
         }),
       no: () =>
@@ -71,6 +72,7 @@ export const useGameStore = create<GameStore>((set) => {
           return {
             gameStatus: "END",
             bestScore: scoresBoard.bestScore,
+            scoresBoard: scoresBoard.scoresBoard,
           };
         }),
       end: () =>
@@ -81,6 +83,7 @@ export const useGameStore = create<GameStore>((set) => {
           return {
             gameStatus: "END",
             bestScore: scoresBoard.bestScore,
+            scoresBoard: scoresBoard.scoresBoard,
           };
         }),
       play: () => set(() => initializeGame("READY")),
@@ -90,7 +93,7 @@ export const useGameStore = create<GameStore>((set) => {
             gameStatus: "HOME",
           };
         }),
-      seeScoreBoard: () =>
+      seeScoresBoard: () =>
         set(() => {
           return {
             gameStatus: "SCORES_BOARD",

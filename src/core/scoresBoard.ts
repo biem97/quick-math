@@ -19,7 +19,8 @@ class ScoresBoard {
   // Getters and setters
 
   get bestScore() {
-    return Math.max(...this.scoresBoard);
+    const isEmpty = this.scoresBoard.length === 0;
+    return isEmpty ? 0 : Math.max(...this.scoresBoard);
   }
 
   // Private methods
@@ -54,9 +55,12 @@ class ScoresBoard {
   }
   private initializeScoresBoard() {
     // Grab data from local storage
-    const scoreBoardInLocalStorage =
-      localStorage.getItem(LOCAL_STORAGE_SCORES_BOARD_KEY) || "";
-    const scoresBoard = JSON.parse(scoreBoardInLocalStorage);
+    const scoreBoardInLocalStorage = localStorage.getItem(
+      LOCAL_STORAGE_SCORES_BOARD_KEY
+    );
+    const scoresBoard = scoreBoardInLocalStorage
+      ? JSON.parse(scoreBoardInLocalStorage)
+      : "";
 
     if (
       !scoreBoardInLocalStorage || // There's no score board key in the local storage
