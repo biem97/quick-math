@@ -1,5 +1,5 @@
 import { ActionIcon } from "@mantine/core";
-import { useHotkeys } from "@mantine/hooks";
+import { useHotkeys, useMediaQuery } from "@mantine/hooks";
 import { TiTick, TiTimes } from "react-icons/ti";
 
 // Store
@@ -7,14 +7,15 @@ import { useGameStore } from "../core/store";
 
 const GameActions = () => {
   const { yes, no, gameStatus, end } = useGameStore(
-    ({ gameStatus, actions: { yes, no, reset, end } }) => ({
+    ({ gameStatus, actions: { yes, no, end } }) => ({
       yes,
       no,
-      reset,
       gameStatus,
       end,
     })
   );
+  const largeScreen = useMediaQuery("(min-width: 900px)");
+
   const isEnd = gameStatus === "END";
 
   useHotkeys([
@@ -35,10 +36,9 @@ const GameActions = () => {
         onClick={yes}
         disabled={isEnd}
       >
-        <TiTick color="skyblue" size="256" />
+        <TiTick color="skyblue" size={largeScreen ? "256" : "128"} />
       </ActionIcon>
       <ActionIcon
-        color="red"
         style={{
           flexGrow: 1,
           height: "auto",
@@ -48,7 +48,7 @@ const GameActions = () => {
         onClick={no}
         disabled={isEnd}
       >
-        <TiTimes color="red" size="256" />
+        <TiTimes color="red" size={largeScreen ? "256" : "128"} />
       </ActionIcon>
     </>
   );

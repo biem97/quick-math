@@ -1,18 +1,12 @@
-import { ActionIcon, Group, Paper, Text } from "@mantine/core";
-import { useHotkeys } from "@mantine/hooks";
-import { TiRefresh } from "react-icons/ti";
+import { Box, Group, Paper, Text } from "@mantine/core";
+import { PlayButton, HomeButton, ScoresBoardButton } from "./Buttons";
 import { useGameStore } from "../core/store";
 
 const GameEndMenu = () => {
-  const { score, reset } = useGameStore(({ score, actions: { reset } }) => ({
+  const { score, bestScore } = useGameStore(({ score, bestScore }) => ({
     score,
-    reset,
+    bestScore,
   }));
-
-  useHotkeys([
-    ["Enter", reset],
-    ["Space", reset],
-  ]);
 
   return (
     <Group
@@ -23,46 +17,91 @@ const GameEndMenu = () => {
       }}
     >
       <Paper
-        style={{
+        sx={(sx) => ({
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
           flexDirection: "column",
           flexGrow: 1,
-          backgroundColor: "darkgray",
-        }}
+          backgroundColor: sx.colors.gray[4],
+        })}
+        radius="lg"
+        py="xl"
+        withBorder
       >
-        <Text
-          component="div"
-          align="center"
-          size="xl"
-          weight={700}
-          style={{ fontSize: "2.5rem", fontFamily: "Greycliff CF, sans-serif" }}
-        >
-          Current
-        </Text>
-        <Text
-          component="div"
-          align="center"
-          size="sm"
-          color="white"
-          weight={700}
-          style={{ fontSize: "2rem", fontFamily: "Greycliff CF, sans-serif" }}
-        >
-          {score}
-        </Text>
+        <Box>
+          <Text
+            component="div"
+            align="center"
+            size="xl"
+            weight={700}
+            sx={(theme) => ({
+              fontSize: "2.5rem",
+              "@media (max-width: 755px)": {
+                fontSize: theme.fontSizes.lg,
+              },
+              fontFamily: "Greycliff CF, sans-serif",
+              color: theme.colors.blue[5],
+            })}
+          >
+            Current
+          </Text>
+          <Text
+            component="div"
+            align="center"
+            color="white"
+            weight={900}
+            sx={(theme) => ({
+              fontSize: "2rem",
+              "@media (max-width: 755px)": {
+                fontSize: theme.fontSizes.md,
+              },
+              fontFamily: "Greycliff CF, sans-serif",
+            })}
+          >
+            {score}
+          </Text>
+        </Box>
+        <Box>
+          <Text
+            component="div"
+            align="center"
+            size="xl"
+            weight={700}
+            color="skyblue"
+            sx={(theme) => ({
+              fontSize: "2.5rem",
+              "@media (max-width: 755px)": {
+                fontSize: theme.fontSizes.lg,
+              },
+              fontFamily: "Greycliff CF, sans-serif",
+              color: theme.colors.blue[5],
+            })}
+          >
+            Best Score
+          </Text>
+          <Text
+            component="div"
+            align="center"
+            color="white"
+            weight={900}
+            sx={(theme) => ({
+              fontSize: "2rem",
+              "@media (max-width: 755px)": {
+                fontSize: theme.fontSizes.md,
+              },
+              fontFamily: "Greycliff CF, sans-serif",
+            })}
+          >
+            {bestScore}
+          </Text>
+        </Box>
       </Paper>
+
       <Group position="apart">
-        <ActionIcon
-          style={{
-            flexGrow: 1,
-          }}
-          size="xl"
-          variant="default"
-          onClick={reset}
-        >
-          <TiRefresh color="skyblue" size="56" />
-        </ActionIcon>
+        <PlayButton />
+        <HomeButton />
+        <ScoresBoardButton />
       </Group>
     </Group>
   );

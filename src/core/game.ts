@@ -1,4 +1,4 @@
-import { GameState } from "./types";
+import { GameState, GameStatus } from "./types";
 
 // Constants
 export const MAX_VALUE = 10;
@@ -8,76 +8,74 @@ export const TIMEOUT_DURATION = 1500; // milliseconds
 
 // Game Core
 export const generateNextGame = (gameState: GameState): GameState => {
-  let firstValue = generateRandomNumber();
-  let secondValue = generateRandomNumber();
+  const firstValue = generateRandomNumber(gameState.firstValue);
+  const secondValue = generateRandomNumber(gameState.firstValue);
   const shouldBeFalsyEquation = generateRandomBoolean();
-
   let sum = firstValue + secondValue;
 
   if (shouldBeFalsyEquation) {
-    const differentialValue = generateRandomDifferentValue();
-    sum += differentialValue;
-  }
-
-  if (firstValue === gameState.firstValue) {
-    firstValue += generateRandomDifferentValue();
-  }
-
-  if (secondValue === gameState.secondValue) {
-    secondValue += generateRandomDifferentValue();
-  }
-
-  sum = firstValue + secondValue;
-
-  if (shouldBeFalsyEquation) {
-    const differentialValue = generateRandomDifferentValue();
-    sum += differentialValue;
+    sum = generateFalsySum(sum);
   }
 
   return {
     firstValue,
     secondValue,
     sum,
-    gameStatus: "PLAYING",
     score: gameState.score + 1,
+    gameStatus: "PLAYING",
     timeoutDuration: TIMEOUT_DURATION,
   };
 };
 
-export const initializeGame = (): GameState => {
+export const initializeGame = (gameStatus: GameStatus = "HOME"): GameState => {
   const firstValue = generateRandomNumber();
   const secondValue = generateRandomNumber();
   const shouldBeFalsyEquation = generateRandomBoolean();
   let sum = firstValue + secondValue;
 
   if (shouldBeFalsyEquation) {
-    const differentialValue = generateRandomDifferentValue();
-    sum += differentialValue;
+    sum = generateFalsySum(sum);
   }
 
   return {
     firstValue,
     secondValue,
-    gameStatus: "READY",
-    score: 0,
     sum,
+    score: 0,
+    gameStatus,
     timeoutDuration: TIMEOUT_DURATION,
   };
 };
 
 // Helper functions
-export const generateRandomDifferentValue = (): number => {
-  const differentValue = Math.floor(Math.random() * 4) - 2;
+export const generateFalsySum = (sum: number): number => {
+  const plusOrMinusOne = generateRandomBoolean() ? 1 : -1;
+  const differentValue = plusOrMinusOne * Math.floor(Math.random() * 2) + 2;
+  let newSum = sum + differentValue;
 
-  if (differentValue === 0) {
+  if (newSum <= 0) {
     return 1;
   }
 
-  return differentValue;
+  return newSum;
 };
 
-export const generateRandomNumber = (): number =>
-  Math.floor(Math.random() * MAX_VALUE) + MIN_VALUE;
+export const generateRandomNumber = (previous?: number): number => {
+  const randomNumber =
+    Math.floor(Math.random() * (MAX_VALUE - MIN_VALUE)) + MIN_VALUE;
+
+  // If there's no previous number, return random number
+  if (!previous) {
+    return randomNumber;
+  }
+
+  // Avoid generate duplicate number
+  if (randomNumber === previous) {
+    return randomNumber + Math.floor(Math.random() * 2) + 1;
+  }
+
+  return randomNumber;
+};
 
 export const generateRandomBoolean = (): boolean =>
   Math.random() <= RANDOM_BOOLEAN_ODD;

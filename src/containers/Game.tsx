@@ -5,6 +5,7 @@ import { Group, Center } from "@mantine/core";
 import Actions from "../components/Actions";
 import EndMenu from "../components/EndMenu";
 import Equation from "../components/Equation";
+import Helpers from "../components/Helpers";
 import Score from "../components/Score";
 import Timer from "../components/Timer";
 
@@ -21,9 +22,18 @@ const Game = ({}: GameProps) => {
   const isPlaying = gameStatus === "PLAYING";
 
   return (
-    <>
+    <Group
+      style={{
+        height: "100%",
+      }}
+      direction="column"
+      position="center"
+      align="stretch"
+    >
       {isPlaying && <Timer />}
-      <Group position="right">
+      <Group>
+        <Helpers />
+        <div style={{ flexGrow: 1 }} />
         <Score />
       </Group>
 
@@ -35,17 +45,10 @@ const Game = ({}: GameProps) => {
         <Equation />
       </Center>
 
-      <Group
-        style={{
-          flexBasis: "256px",
-        }}
-        position="apart"
-        align="stretch"
-        mb="sm"
-      >
+      <Group position="apart" mb="sm">
         {isEnd ? <EndMenu /> : <Actions />}
       </Group>
-    </>
+    </Group>
   );
 };
 
