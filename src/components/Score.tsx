@@ -12,7 +12,10 @@ const Score = () => {
       size="xl"
       color="white"
       weight={700}
-      style={{ fontSize: "2rem", fontFamily: "Greycliff CF, sans-serif" }}
+      style={{
+        fontSize: "2rem",
+        fontFamily: "Greycliff CF, sans-serif",
+      }}
     >
       {score}
     </Text>

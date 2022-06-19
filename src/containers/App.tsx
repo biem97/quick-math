@@ -1,10 +1,14 @@
 // Mantine UI
 import { Container } from "@mantine/core";
+import { useGameStore } from "../core/store";
 
 // Containers
 import Game from "./Game";
+import Home from "./Home";
 
 const App = () => {
+  const { gameStatus } = useGameStore(({ gameStatus }) => ({ gameStatus }));
+
   return (
     <Container
       size="xs"
@@ -15,7 +19,7 @@ const App = () => {
         height: "90vh",
       }}
     >
-      <Game />
+      {gameStatus === "NOT_READY" ? <Home /> : <Game />}
     </Container>
   );
 };

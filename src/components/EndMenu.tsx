@@ -1,13 +1,17 @@
 import { ActionIcon, Group, Paper, Text } from "@mantine/core";
 import { useHotkeys } from "@mantine/hooks";
-import { TiRefresh } from "react-icons/ti";
 import { useGameStore } from "../core/store";
+import { TiRefresh, TiHome } from "react-icons/ti";
+import { MdLeaderboard } from "react-icons/md";
 
 const GameEndMenu = () => {
-  const { score, reset } = useGameStore(({ score, actions: { reset } }) => ({
-    score,
-    reset,
-  }));
+  const { score, reset, home } = useGameStore(
+    ({ score, actions: { reset, home } }) => ({
+      score,
+      reset,
+      home,
+    })
+  );
 
   useHotkeys([
     ["Enter", reset],
@@ -23,30 +27,35 @@ const GameEndMenu = () => {
       }}
     >
       <Paper
-        style={{
+        sx={(sx) => ({
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
           flexDirection: "column",
           flexGrow: 1,
-          backgroundColor: "darkgray",
-        }}
+          backgroundColor: sx.colors.gray[4],
+        })}
+        radius="lg"
+        withBorder
       >
         <Text
           component="div"
           align="center"
           size="xl"
           weight={700}
-          style={{ fontSize: "2.5rem", fontFamily: "Greycliff CF, sans-serif" }}
+          sx={(theme) => ({
+            fontSize: "2.5rem",
+            fontFamily: "Greycliff CF, sans-serif",
+            color: theme.colors.blue[5],
+          })}
         >
           Current
         </Text>
         <Text
           component="div"
           align="center"
-          size="sm"
           color="white"
-          weight={700}
+          weight={900}
           style={{ fontSize: "2rem", fontFamily: "Greycliff CF, sans-serif" }}
         >
           {score}
@@ -61,7 +70,26 @@ const GameEndMenu = () => {
           variant="default"
           onClick={reset}
         >
-          <TiRefresh color="skyblue" size="56" />
+          <TiRefresh color="skyblue" size="48" />
+        </ActionIcon>
+        <ActionIcon
+          style={{
+            flexGrow: 1,
+          }}
+          size="xl"
+          variant="default"
+          onClick={home}
+        >
+          <TiHome color="skyblue" size="32" />
+        </ActionIcon>
+        <ActionIcon
+          style={{
+            flexGrow: 1,
+          }}
+          size="xl"
+          variant="default"
+        >
+          <MdLeaderboard color="skyblue" size="32" />
         </ActionIcon>
       </Group>
     </Group>

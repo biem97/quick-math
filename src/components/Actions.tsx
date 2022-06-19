@@ -38,7 +38,6 @@ const GameActions = () => {
         <TiTick color="skyblue" size="256" />
       </ActionIcon>
       <ActionIcon
-        color="red"
         style={{
           flexGrow: 1,
           height: "auto",
