@@ -12,7 +12,7 @@ const ScoresBoard = ({}: GameProps) => {
   const { scoresBoard } = useGameStore(({ scoresBoard }) => ({
     scoresBoard,
   }));
-  console.log("scoresBoard: ", scoresBoard);
+
   const rows = scoresBoard.map((score, index) => (
     <tr key={index}>
       <td>{index + 1}</td>

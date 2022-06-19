@@ -1,5 +1,4 @@
 // Mantine UI
-import { Container } from "@mantine/core";
 import { useGameStore } from "../core/store";
 
 // Containers
