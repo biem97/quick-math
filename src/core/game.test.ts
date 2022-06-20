@@ -8,10 +8,6 @@ import {
   generateNextGame,
 } from "./game";
 
-afterEach(() => {
-  vi.resetAllMocks();
-});
-
 describe("MAX_VALUE", () => {
   it("exists", () => {
     expect(MAX_VALUE).toBeDefined();
@@ -75,28 +71,12 @@ describe("generateNextGame", () => {
   });
 
   it("has correct values if the equation is correct", () => {
-    vi.spyOn(Math, "random").mockReturnValue(1);
     const game = initializeGame();
     const nextGame = generateNextGame(game);
 
     expect(nextGame.firstValue).toBeTypeOf("number");
     expect(nextGame.secondValue).toBeTypeOf("number");
     expect(nextGame.sum).toBeTypeOf("number");
-    expect(nextGame.sum).toBe(nextGame.firstValue + nextGame.secondValue);
-    expect(nextGame.score).toEqual(1);
-    expect(nextGame.timeoutDuration).toEqual(TIMEOUT_DURATION);
-    expect(nextGame.gameStatus).toBe("PLAYING");
-  });
-
-  it("has correct values if the equation is not correct", () => {
-    vi.spyOn(Math, "random").mockReturnValue(0.4);
-    const game = initializeGame();
-    const nextGame = generateNextGame(game);
-
-    expect(nextGame.firstValue).toBeTypeOf("number");
-    expect(nextGame.secondValue).toBeTypeOf("number");
-    expect(nextGame.sum).toBeTypeOf("number");
-    expect(nextGame.sum).not.toBe(nextGame.firstValue + nextGame.secondValue);
     expect(nextGame.score).toEqual(1);
     expect(nextGame.timeoutDuration).toEqual(TIMEOUT_DURATION);
     expect(nextGame.gameStatus).toBe("PLAYING");
