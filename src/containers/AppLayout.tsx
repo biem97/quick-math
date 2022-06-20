@@ -40,7 +40,6 @@ const Theme = ({ children }: ThemeProps) => {
             height: "100vh",
             alignItems: "center",
           }}
-          py="xl"
         >
           <Container
             sx={(theme) => ({
