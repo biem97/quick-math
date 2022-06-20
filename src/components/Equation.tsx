@@ -19,6 +19,7 @@ const GameEquation = ({}: GameEquationProps) => {
           fontSize: "5rem",
           fontFamily: "Greycliff CF, sans-serif",
         }}
+        id="equation"
       >
         {`${firstValue} + ${secondValue}`}
       </Text>
@@ -27,6 +28,7 @@ const GameEquation = ({}: GameEquationProps) => {
         align="center"
         size="xl"
         weight={700}
+        id="sum"
         sx={{
           fontSize: "5rem",
           fontFamily: "Greycliff CF, sans-serif",

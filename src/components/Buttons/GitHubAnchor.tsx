@@ -4,6 +4,7 @@ import { TiSocialGithub } from "react-icons/ti";
 const GitHubAnchor = () => {
   return (
     <Anchor
+      id="git-hub-anchor"
       style={{
         flexGrow: 1,
       }}

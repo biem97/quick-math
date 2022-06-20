@@ -27,6 +27,7 @@ const GameActions = () => {
   return (
     <Group>
       <ActionIcon
+        id="yes-btn"
         style={{
           flexGrow: 1,
           height: "auto",
@@ -39,6 +40,7 @@ const GameActions = () => {
         <TiTick color="green" size={largeScreen ? "180" : "128"} />
       </ActionIcon>
       <ActionIcon
+        id="no-btn"
         style={{
           flexGrow: 1,
           height: "auto",

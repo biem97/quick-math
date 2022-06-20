@@ -11,6 +11,7 @@ const ScoresBoardButton = () => {
 
   return (
     <ActionIcon
+      id="scores-board-btn"
       style={{
         flexGrow: 1,
       }}

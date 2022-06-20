@@ -15,6 +15,7 @@ const PlayButton = () => {
 
   return (
     <ActionIcon
+      id="play-btn"
       style={{
         flexGrow: 1,
       }}
