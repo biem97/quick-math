@@ -28,10 +28,10 @@ const GameEndMenu = () => {
             align="center"
             size="xl"
             weight={700}
-            sx={(theme) => ({
+            style={{
               fontSize: "2rem",
               fontFamily: "Greycliff CF, sans-serif",
-            })}
+            }}
           >
             Current
           </Text>
@@ -53,10 +53,10 @@ const GameEndMenu = () => {
             align="center"
             size="xl"
             weight={700}
-            sx={(theme) => ({
+            style={{
               fontSize: "2rem",
               fontFamily: "Greycliff CF, sans-serif",
-            })}
+            }}
           >
             Best Score
           </Text>

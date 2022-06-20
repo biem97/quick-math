@@ -2,6 +2,7 @@ import {
   ColorScheme,
   ColorSchemeProvider,
   Container,
+  Global,
   MantineProvider,
 } from "@mantine/core";
 import { ReactNode } from "react";
@@ -55,15 +56,35 @@ const Theme = ({ children }: ThemeProps) => {
         withNormalizeCSS
         withGlobalStyles
       >
+        <Global
+          styles={(theme) => ({
+            "*, *::before, *::after": {
+              boxSizing: "border-box",
+            },
+
+            body: {
+              ...theme.fn.fontStyles(),
+              backgroundColor:
+                theme.colorScheme === "dark"
+                  ? theme.colors.dark[7]
+                  : theme.colors.indigo[7],
+              color:
+                theme.colorScheme === "dark"
+                  ? theme.colors.dark[0]
+                  : theme.colors.indigo[0],
+              lineHeight: theme.lineHeight,
+            },
+          })}
+        />
         <Container
           sx={(theme) => ({
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            height: "80vh",
+            height: "100vh",
             backgroundColor:
               theme.colorScheme === "light"
-                ? theme.colors.blue[3]
+                ? theme.colors.indigo[3]
                 : theme.colors.dark[6],
           })}
           size="xs"
