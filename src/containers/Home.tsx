@@ -22,11 +22,16 @@ const Home = ({}: GameProps) => {
       }}
       px="md"
     >
-      <img src={GameLogo} />
+      <img
+        style={{
+          width: "80%",
+        }}
+        src={GameLogo}
+      />
       <Group
         mt="xl"
         style={{
-          width: "80%",
+          width: "100%",
         }}
       >
         <PlayButton />

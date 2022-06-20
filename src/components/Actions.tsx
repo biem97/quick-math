@@ -36,7 +36,7 @@ const GameActions = () => {
         onClick={yes}
         disabled={isEnd}
       >
-        <TiTick color="skyblue" size={largeScreen ? "256" : "128"} />
+        <TiTick color="skyblue" size={largeScreen ? "180" : "128"} />
       </ActionIcon>
       <ActionIcon
         style={{
@@ -48,7 +48,7 @@ const GameActions = () => {
         onClick={no}
         disabled={isEnd}
       >
-        <TiTimes color="red" size={largeScreen ? "256" : "128"} />
+        <TiTimes color="red" size={largeScreen ? "180" : "128"} />
       </ActionIcon>
     </>
   );

@@ -49,7 +49,7 @@ const Theme = ({ children }: ThemeProps) => {
                   ? theme.colors.gray[6]
                   : theme.colors.blue[4],
               height: "100%",
-              minWidth: "560px",
+              width: "500px",
             })}
           >
             {children}
