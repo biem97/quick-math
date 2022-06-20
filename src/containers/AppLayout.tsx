@@ -5,7 +5,7 @@ import {
   Global,
   MantineProvider,
 } from "@mantine/core";
-import { ReactNode } from "react";
+import { ReactNode, useLayoutEffect } from "react";
 import { useHotkeys, useLocalStorage } from "@mantine/hooks";
 import { MantineThemeOverride } from "@mantine/core";
 
@@ -44,6 +44,15 @@ const Theme = ({ children }: ThemeProps) => {
   const toggleColorScheme = (value?: ColorScheme) =>
     setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"));
 
+  // This will set the height of the device equal to the height of inner document
+  // Allow the height to always work on mobile device
+  useLayoutEffect(() => {
+    document.documentElement.style.setProperty(
+      "--doc-height",
+      `${window.innerHeight}px`
+    );
+  }, []);
+
   useHotkeys([["ctrl+J", () => toggleColorScheme()]]);
 
   return (
@@ -58,6 +67,9 @@ const Theme = ({ children }: ThemeProps) => {
       >
         <Global
           styles={(theme) => ({
+            ":root": {
+              "--doc-height": "100%",
+            },
             "*, *::before, *::after": {
               boxSizing: "border-box",
             },
@@ -81,7 +93,7 @@ const Theme = ({ children }: ThemeProps) => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            height: "100vh",
+            height: "var(--doc-height)",
             backgroundColor:
               theme.colorScheme === "light"
                 ? theme.colors.indigo[3]
