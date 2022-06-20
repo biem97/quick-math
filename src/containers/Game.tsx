@@ -45,7 +45,7 @@ const Game = ({}: GameProps) => {
         <Equation />
       </Center>
 
-      <Group position="apart" mb="sm">
+      <Group position="apart" mb="xl">
         {isEnd ? <EndMenu /> : <Actions />}
       </Group>
     </Group>

@@ -37,9 +37,6 @@ const GameEndMenu = () => {
             weight={700}
             sx={(theme) => ({
               fontSize: "2.5rem",
-              "@media (max-width: 755px)": {
-                fontSize: theme.fontSizes.lg,
-              },
               fontFamily: "Greycliff CF, sans-serif",
               color: theme.colors.blue[5],
             })}
@@ -51,11 +48,8 @@ const GameEndMenu = () => {
             align="center"
             color="white"
             weight={900}
-            sx={(theme) => ({
+            sx={() => ({
               fontSize: "2rem",
-              "@media (max-width: 755px)": {
-                fontSize: theme.fontSizes.md,
-              },
               fontFamily: "Greycliff CF, sans-serif",
             })}
           >
