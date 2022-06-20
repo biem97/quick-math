@@ -60,7 +60,7 @@ const Theme = ({ children }: ThemeProps) => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            height: "100vh",
+            height: "80vh",
             backgroundColor:
               theme.colorScheme === "light"
                 ? theme.colors.blue[3]
