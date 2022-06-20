@@ -6,21 +6,18 @@ set -e
 # build
 yarn run build
 
+$COMMIT_SHA = git log --pretty=format:'%h' -n 1
+$DATE = date
+
 # navigate into the build output directory
 cd dist
 
-# if you are deploying to a custom domain
-# echo 'www.example.com' > CNAME
-
 git init
-git checkout -b main
+git checkout -b deploy
 git add -A
-git commit -m 'deploy'
-
-# if you are deploying to https://<USERNAME>.github.io
-# git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git main
+git commit -m "deploy ${COMMIT_SHA} @ ${DATE}"
 
 # if you are deploying to https://<USERNAME>.github.io/<REPO>
-# git push -f git@github.com:<USERNAME>/<REPO>.git main:gh-pages
+git push -f git@github.com:biem97/quick-math.git main:gh-pages
 
 cd -
