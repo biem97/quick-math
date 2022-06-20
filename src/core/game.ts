@@ -11,6 +11,7 @@ export const generateNextGame = (gameState: GameState): GameState => {
   const firstValue = generateRandomNumber(gameState.firstValue);
   const secondValue = generateRandomNumber(gameState.firstValue);
   const shouldBeFalsyEquation = generateRandomBoolean();
+  console.log("shouldBeFalsyEquation: ", shouldBeFalsyEquation);
   let sum = firstValue + secondValue;
 
   if (shouldBeFalsyEquation) {

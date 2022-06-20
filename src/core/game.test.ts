@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import {
   MAX_VALUE,
   MIN_VALUE,
@@ -7,6 +7,10 @@ import {
   initializeGame,
   generateNextGame,
 } from "./game";
+
+afterEach(() => {
+  vi.resetAllMocks();
+});
 
 describe("MAX_VALUE", () => {
   it("exists", () => {
@@ -61,7 +65,7 @@ describe("initializeGame", () => {
     expect(game.sum).toBeTypeOf("number");
     expect(game.score).toEqual(0);
     expect(game.timeoutDuration).toEqual(TIMEOUT_DURATION);
-    expect(game.gameStatus).toBe("READY");
+    expect(game.gameStatus).toBe("HOME");
   });
 });
 
@@ -70,13 +74,29 @@ describe("generateNextGame", () => {
     expect(generateNextGame).toBeDefined();
   });
 
-  it("has correct values", () => {
+  it("has correct values if the equation is correct", () => {
+    vi.spyOn(Math, "random").mockReturnValue(1);
     const game = initializeGame();
     const nextGame = generateNextGame(game);
 
     expect(nextGame.firstValue).toBeTypeOf("number");
     expect(nextGame.secondValue).toBeTypeOf("number");
     expect(nextGame.sum).toBeTypeOf("number");
+    expect(nextGame.sum).toBe(nextGame.firstValue + nextGame.secondValue);
+    expect(nextGame.score).toEqual(1);
+    expect(nextGame.timeoutDuration).toEqual(TIMEOUT_DURATION);
+    expect(nextGame.gameStatus).toBe("PLAYING");
+  });
+
+  it("has correct values if the equation is not correct", () => {
+    vi.spyOn(Math, "random").mockReturnValue(0.4);
+    const game = initializeGame();
+    const nextGame = generateNextGame(game);
+
+    expect(nextGame.firstValue).toBeTypeOf("number");
+    expect(nextGame.secondValue).toBeTypeOf("number");
+    expect(nextGame.sum).toBeTypeOf("number");
+    expect(nextGame.sum).not.toBe(nextGame.firstValue + nextGame.secondValue);
     expect(nextGame.score).toEqual(1);
     expect(nextGame.timeoutDuration).toEqual(TIMEOUT_DURATION);
     expect(nextGame.gameStatus).toBe("PLAYING");
