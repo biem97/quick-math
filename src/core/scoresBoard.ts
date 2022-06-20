@@ -11,7 +11,6 @@ class ScoresBoard {
 
   updateScoresBoard(score: number) {
     this.scoresBoard.push(score);
-    console.log(this.sanitizeScoresBoard(this.scoresBoard));
     this.scoresBoard = this.sanitizeScoresBoard(this.scoresBoard);
     this.updateLocalStorage(this.scoresBoard);
   }

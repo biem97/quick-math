@@ -11,12 +11,7 @@ const ThemeToggle = () => {
       size="xl"
       onClick={() => toggleColorScheme()}
       title="Toggle color scheme"
-      sx={(theme) => ({
-        color: "white",
-        ":hover": {
-          color: theme.colors.gray[6],
-        },
-      })}
+      sx={(theme) => ({})}
     >
       {dark ? <MdDarkMode size={32} /> : <MdWbSunny size={32} />}
     </ActionIcon>

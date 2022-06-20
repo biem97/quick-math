@@ -1,5 +1,5 @@
 // Mantine UI
-import { Group } from "@mantine/core";
+import { Box, Group } from "@mantine/core";
 
 // Images
 import GameLogo from "../assets/image/game_logo.svg";
@@ -13,32 +13,21 @@ interface GameProps {}
 
 const Home = ({}: GameProps) => {
   return (
-    <Group
-      direction="column"
-      align="center"
-      style={{
-        justifyContent: "center",
-        height: "100%",
-      }}
-      px="md"
-    >
-      <img
-        style={{
-          width: "80%",
-        }}
-        src={GameLogo}
-      />
-      <Group
-        mt="xl"
-        style={{
-          width: "100%",
-        }}
-      >
+    <div>
+      <Box mb="xl">
+        <img
+          style={{
+            width: "360px",
+          }}
+          src={GameLogo}
+        />
+      </Box>
+      <Group mt="xl">
         <PlayButton />
         <ScoresBoardButton />
         <GitHubAnchor />
       </Group>
-    </Group>
+    </div>
   );
 };
 

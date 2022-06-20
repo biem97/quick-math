@@ -1,4 +1,4 @@
-import { ActionIcon, Tooltip } from "@mantine/core";
+import { ActionIcon } from "@mantine/core";
 import { useGameStore } from "../../core/store";
 import { TiHome } from "react-icons/ti";
 
@@ -8,24 +8,16 @@ const HomeButton = () => {
   }));
 
   return (
-    <Tooltip
+    <ActionIcon
       style={{
         flexGrow: 1,
       }}
-      label="Home"
-      withArrow
+      size="xl"
+      variant="default"
+      onClick={home}
     >
-      <ActionIcon
-        style={{
-          width: "100%",
-        }}
-        size="xl"
-        variant="default"
-        onClick={home}
-      >
-        <TiHome color="skyblue" size="32" />
-      </ActionIcon>
-    </Tooltip>
+      <TiHome size="32" />
+    </ActionIcon>
   );
 };
 

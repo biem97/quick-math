@@ -1,5 +1,5 @@
 // Mantine UI
-import { Group, Center } from "@mantine/core";
+import { Group, Center, Box } from "@mantine/core";
 
 // Components
 import Actions from "../components/Actions";
@@ -22,13 +22,14 @@ const Game = ({}: GameProps) => {
   const isPlaying = gameStatus === "PLAYING";
 
   return (
-    <Group
+    <Box
       style={{
+        display: "flex",
+        flexDirection: "column",
+        width: "100%",
         height: "100%",
       }}
-      direction="column"
-      position="center"
-      align="stretch"
+      py="xl"
     >
       {isPlaying && <Timer />}
       <Group>
@@ -45,10 +46,8 @@ const Game = ({}: GameProps) => {
         <Equation />
       </Center>
 
-      <Group position="apart" mb="xl">
-        {isEnd ? <EndMenu /> : <Actions />}
-      </Group>
-    </Group>
+      <Box>{isEnd ? <EndMenu /> : <Actions />}</Box>
+    </Box>
   );
 };
 

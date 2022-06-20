@@ -10,7 +10,6 @@ const Score = () => {
     <Text
       align="center"
       size="xl"
-      color="white"
       weight={700}
       style={{
         fontSize: "2rem",

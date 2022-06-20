@@ -19,10 +19,6 @@ const Helpers = () => {
       <ThemeToggle />
       <ActionIcon
         sx={(theme) => ({
-          color: theme.colors.gray[0],
-          ":hover": {
-            color: theme.colors.gray[6],
-          },
           height: "auto",
         })}
         size="xl"

@@ -14,7 +14,6 @@ const GameEquation = ({}: GameEquationProps) => {
         component="div"
         align="center"
         size="xl"
-        color="white"
         weight={700}
         sx={{
           fontSize: "5rem",
@@ -27,7 +26,6 @@ const GameEquation = ({}: GameEquationProps) => {
         component="div"
         align="center"
         size="xl"
-        color="white"
         weight={700}
         sx={{
           fontSize: "5rem",

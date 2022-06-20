@@ -1,4 +1,4 @@
-import { ActionIcon } from "@mantine/core";
+import { ActionIcon, Group } from "@mantine/core";
 import { useHotkeys, useMediaQuery } from "@mantine/hooks";
 import { TiTick, TiTimes } from "react-icons/ti";
 
@@ -25,7 +25,7 @@ const GameActions = () => {
   ]);
 
   return (
-    <>
+    <Group>
       <ActionIcon
         style={{
           flexGrow: 1,
@@ -36,7 +36,7 @@ const GameActions = () => {
         onClick={yes}
         disabled={isEnd}
       >
-        <TiTick color="skyblue" size={largeScreen ? "180" : "128"} />
+        <TiTick color="green" size={largeScreen ? "180" : "128"} />
       </ActionIcon>
       <ActionIcon
         style={{
@@ -50,7 +50,7 @@ const GameActions = () => {
       >
         <TiTimes color="red" size={largeScreen ? "180" : "128"} />
       </ActionIcon>
-    </>
+    </Group>
   );
 };
 

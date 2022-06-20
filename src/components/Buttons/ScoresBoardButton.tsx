@@ -1,4 +1,4 @@
-import { ActionIcon, Tooltip } from "@mantine/core";
+import { ActionIcon } from "@mantine/core";
 import { useGameStore } from "../../core/store";
 import { MdLeaderboard } from "react-icons/md";
 
@@ -10,24 +10,16 @@ const ScoresBoardButton = () => {
   );
 
   return (
-    <Tooltip
+    <ActionIcon
       style={{
         flexGrow: 1,
       }}
-      label="Scores Board"
-      withArrow
+      size="xl"
+      variant="default"
+      onClick={seeScoresBoard}
     >
-      <ActionIcon
-        style={{
-          width: "100%",
-        }}
-        size="xl"
-        variant="default"
-        onClick={seeScoresBoard}
-      >
-        <MdLeaderboard color="skyblue" size="32" />
-      </ActionIcon>
-    </Tooltip>
+      <MdLeaderboard size="32" />
+    </ActionIcon>
   );
 };
 

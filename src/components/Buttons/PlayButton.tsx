@@ -1,4 +1,4 @@
-import { ActionIcon, Tooltip } from "@mantine/core";
+import { ActionIcon } from "@mantine/core";
 import { useGameStore } from "../../core/store";
 import { TiMediaPlay } from "react-icons/ti";
 import { useHotkeys } from "@mantine/hooks";
@@ -14,24 +14,16 @@ const PlayButton = () => {
   ]);
 
   return (
-    <Tooltip
+    <ActionIcon
       style={{
         flexGrow: 1,
       }}
-      label="Play"
-      withArrow
+      size="xl"
+      variant="default"
+      onClick={play}
     >
-      <ActionIcon
-        style={{
-          width: "100%",
-        }}
-        size="xl"
-        variant="default"
-        onClick={play}
-      >
-        <TiMediaPlay color="skyblue" size="48" />
-      </ActionIcon>
-    </Tooltip>
+      <TiMediaPlay size="48" />
+    </ActionIcon>
   );
 };
 

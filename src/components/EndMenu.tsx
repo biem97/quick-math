@@ -9,24 +9,17 @@ const GameEndMenu = () => {
   }));
 
   return (
-    <Group
-      direction="column"
-      align="stretch"
-      style={{
-        flexGrow: 4,
-      }}
-    >
+    <Group direction="column" align="stretch">
       <Paper
-        sx={(sx) => ({
+        style={{
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
           flexDirection: "column",
           flexGrow: 1,
-          backgroundColor: sx.colors.gray[4],
-        })}
+        }}
         radius="lg"
-        py="xl"
+        py="xs"
         withBorder
       >
         <Box>
@@ -36,9 +29,8 @@ const GameEndMenu = () => {
             size="xl"
             weight={700}
             sx={(theme) => ({
-              fontSize: "2.5rem",
+              fontSize: "2rem",
               fontFamily: "Greycliff CF, sans-serif",
-              color: theme.colors.blue[5],
             })}
           >
             Current
@@ -46,12 +38,11 @@ const GameEndMenu = () => {
           <Text
             component="div"
             align="center"
-            color="white"
             weight={900}
-            sx={() => ({
-              fontSize: "2rem",
+            style={{
+              fontSize: "1.5rem",
               fontFamily: "Greycliff CF, sans-serif",
-            })}
+            }}
           >
             {score}
           </Text>
@@ -62,14 +53,9 @@ const GameEndMenu = () => {
             align="center"
             size="xl"
             weight={700}
-            color="skyblue"
             sx={(theme) => ({
-              fontSize: "2.5rem",
-              "@media (max-width: 755px)": {
-                fontSize: theme.fontSizes.lg,
-              },
+              fontSize: "2rem",
               fontFamily: "Greycliff CF, sans-serif",
-              color: theme.colors.blue[5],
             })}
           >
             Best Score
@@ -77,15 +63,11 @@ const GameEndMenu = () => {
           <Text
             component="div"
             align="center"
-            color="white"
             weight={900}
-            sx={(theme) => ({
-              fontSize: "2rem",
-              "@media (max-width: 755px)": {
-                fontSize: theme.fontSizes.md,
-              },
+            style={{
+              fontSize: "1.5rem",
               fontFamily: "Greycliff CF, sans-serif",
-            })}
+            }}
           >
             {bestScore}
           </Text>

@@ -25,52 +25,36 @@ const ScoresBoard = ({}: GameProps) => {
   ));
 
   return (
-    <Box p="xl">
+    <Box
+      style={{
+        width: "100%",
+      }}
+    >
       <Title
-        sx={(theme) => ({
-          color:
-            theme.colorScheme === "dark"
-              ? theme.colors.blue[9]
-              : theme.colors.dark[6],
+        style={{
           textAlign: "center",
-        })}
-        mb="md"
-        order={1}
+        }}
+        order={2}
       >
         <FaTrophy /> Scores board <FaTrophy />
       </Title>
-      <Group
+      <Table
         style={{
-          width: "100%",
+          borderRadius: 10,
         }}
+        fontSize="xl"
+        highlightOnHover
+        my="xs"
       >
-        <Table
-          sx={(theme) => ({
-            borderRadius: 10,
-            backgroundColor:
-              theme.colorScheme === "light"
-                ? theme.colors.blue[2]
-                : theme.colors.gray[7],
-          })}
-          verticalSpacing="md"
-          horizontalSpacing="xl"
-          fontSize="xl"
-        >
-          <thead>
-            <tr>
-              <th>Rank</th>
-              <th>Score</th>
-            </tr>
-          </thead>
-          {<tbody>{rows}</tbody>}
-        </Table>
-      </Group>
-      <Group
-        mt="xl"
-        style={{
-          width: "100%",
-        }}
-      >
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Score</th>
+          </tr>
+        </thead>
+        {<tbody>{rows}</tbody>}
+      </Table>
+      <Group>
         <PlayButton />
         <HomeButton />
       </Group>
